@@ -1,0 +1,44 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+[x-cloak] { display: none !important; }
+
+@layer base {
+    :focus-visible {
+        @apply outline-2 outline-offset-2 outline-sibaya-gold;
+    }
+}
+
+@layer components {
+    .brush-gold {
+        @apply inline-block px-6 py-2 font-script text-2xl text-sibaya-navy-900;
+        background: linear-gradient(100deg, transparent 0, #F3D27A 5%, #EDC252 95%, transparent 100%);
+        transform: rotate(-2deg);
+    }
+
+    .ornament-dots {
+        background-image: radial-gradient(circle at 1px 1px, rgba(226, 172, 47, .35) 1.5px, transparent 0);
+        background-size: 22px 22px;
+    }
+
+    /* Gaya artikel materi (hasil SafeMarkdown), tanpa plugin typography */
+    .prose-sibaya { @apply text-base leading-relaxed text-sibaya-ink; }
+    .prose-sibaya > * + * { @apply mt-4; }
+    .prose-sibaya h2 { @apply mt-8 text-xl font-bold text-sibaya-navy-800; }
+    .prose-sibaya h3 { @apply mt-6 text-lg font-semibold text-sibaya-navy-800; }
+    .prose-sibaya ul { @apply list-disc space-y-1 pl-6; }
+    .prose-sibaya ol { @apply list-decimal space-y-1 pl-6; }
+    .prose-sibaya blockquote { @apply border-l-4 border-sibaya-gold bg-sibaya-gold-soft/20 px-4 py-2 italic; }
+    .prose-sibaya a { @apply text-sibaya-navy-700 underline; }
+    .prose-sibaya table { @apply w-full border-collapse text-sm; }
+    .prose-sibaya th { @apply border border-sibaya-sky-200 bg-sibaya-sky-100 px-3 py-2 text-left font-semibold; }
+    .prose-sibaya td { @apply border border-sibaya-sky-200 px-3 py-2; }
+}
+
+html { scroll-behavior: smooth; }
+
+@media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    * { transition: none !important; }
+}

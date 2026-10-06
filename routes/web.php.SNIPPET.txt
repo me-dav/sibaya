@@ -1,0 +1,9 @@
+// ganti route '/' bawaan (view 'welcome') di routes/web.php dengan:
+
+use App\Http\Controllers\HomeController;
+
+Route::get('/', [HomeController::class, 'index'])->name('home');
+
+// Route /ruang-piwulang, /gladhen-mandiri, /evaluasi, /wahana-teka-teki
+// BELUM dibuat (Tahap 4, 5, 8, 11). Navbar memakai Route::has() sehingga
+// link otomatis aktif begitu route tersebut didaftarkan.
