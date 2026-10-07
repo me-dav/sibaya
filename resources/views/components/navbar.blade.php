@@ -39,6 +39,7 @@
                     </button>
                     <div x-show="menu" x-cloak class="absolute right-0 mt-2 w-48 overflow-hidden rounded-xl bg-white py-1 text-sm text-sibaya-ink shadow-lg ring-1 ring-black/5">
                         <p class="truncate px-4 py-2 text-xs text-slate-500">{{ auth()->user()->name }}</p>
+                        @if (Route::has('dashboard'))<a href="{{ route('dashboard') }}" class="block px-4 py-2 hover:bg-sibaya-sky-100">Dashboard</a>@endif
                         <a href="{{ $profileUrl }}" class="block px-4 py-2 hover:bg-sibaya-sky-100">Profil</a>
                         <form method="POST" action="{{ route('logout') }}">
                             @csrf

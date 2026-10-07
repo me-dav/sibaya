@@ -101,6 +101,18 @@
             <x-input-error :messages="$errors->get('keywords')" class="mt-1" /></div>
     </div>
 
+    @isset($rinenggaTypes)
+        @php $meta = is_array($question->metadata) ? $question->metadata : (json_decode((string) $question->metadata, true) ?: []); @endphp
+        <div class="max-w-sm">
+            <label for="rinengga_type_id" class="block text-sm font-medium">Jenis Basa Rinengga (kanggo rekomendasi materi)</label>
+            <select id="rinengga_type_id" name="rinengga_type_id" class="{{ $input }}">
+                <option value="">Ora ditemtokake</option>
+                @foreach ($rinenggaTypes as $rt)<option value="{{ $rt->id }}" @selected(old('rinengga_type_id', $meta['rinengga_type_id'] ?? null) == $rt->id)>{{ $rt->name }}</option>@endforeach
+            </select>
+            <x-input-error :messages="$errors->get('rinengga_type_id')" class="mt-1" />
+        </div>
+    @endisset
+
     {{-- Bobot --}}
     <div x-show="type !== 'text_analysis'" x-cloak class="max-w-xs">
         <label for="points" class="block text-sm font-medium">Bobot soal <span class="text-red-600">*</span></label>
@@ -111,6 +123,6 @@
 
     <div class="flex gap-3 border-t border-slate-200 pt-6">
         <button type="submit" class="rounded-lg bg-sibaya-navy-800 px-5 py-2.5 text-sm font-semibold text-white hover:bg-sibaya-navy-700">Simpen</button>
-        <a href="{{ route('admin.exercises.show', $exercise) }}" class="rounded-lg border border-slate-300 px-5 py-2.5 text-sm font-semibold">Batal</a>
+        <a href="{{ $cancelUrl ?? route('admin.exercises.show', $exercise) }}" class="rounded-lg border border-slate-300 px-5 py-2.5 text-sm font-semibold">Batal</a>
     </div>
 </form>

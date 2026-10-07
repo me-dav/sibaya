@@ -26,6 +26,12 @@ class StoreQuestionRequest extends FormRequest
         return true;
     }
 
+    /** Tipe soal yang boleh dibuat. Default: menurut jenis latihan. */
+    protected function allowedTypes(): array
+    {
+        return Labels::allowedQuestionTypes(Labels::value($this->exercise()->exercise_type));
+    }
+
     protected function questionType(): string
     {
         return (string) $this->input('question_type');
@@ -39,11 +45,10 @@ class StoreQuestionRequest extends FormRequest
     public function rules(): array
     {
         $type = $this->questionType();
-        $rules = [];
+        $rules = ['rinengga_type_id' => ['nullable', 'integer', Rule::exists('rinengga_types', 'id')]];
 
         if ($this->isCreate()) {
-            $allowed = Labels::allowedQuestionTypes(Labels::value($this->exercise()->exercise_type));
-            $rules['question_type'] = ['required', Rule::enum(QuestionType::class), Rule::in($allowed)];
+            $rules['question_type'] = ['required', Rule::enum(QuestionType::class), Rule::in($this->allowedTypes())];
         }
 
         $options = [

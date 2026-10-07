@@ -20,7 +20,8 @@ class QuestionService
         return config('sibaya.private_disk', 'local');
     }
 
-    public function create(Exercise $exercise, array $data, ?UploadedFile $audio = null): Question
+    /** $exercise null = soal mandiri (bank soal) yang dipakai evaluasi. */
+    public function create(?Exercise $exercise, array $data, ?UploadedFile $audio = null): Question
     {
         $stored = null;
 
@@ -35,9 +36,9 @@ class QuestionService
                 }
 
                 $question->forceFill($attrs + [
-                    'exercise_id'   => $exercise->id,
+                    'exercise_id'   => $exercise?->id,
                     'question_type' => $type,
-                    'sort_order'    => ((int) Question::where('exercise_id', $exercise->id)->max('sort_order')) + 1,
+                    'sort_order'    => $exercise ? ((int) Question::where('exercise_id', $exercise->id)->max('sort_order')) + 1 : 0,
                 ])->save();
 
                 if (in_array($type, ['multiple_choice', 'audio_choice'], true)) {
@@ -171,6 +172,15 @@ class QuestionService
                 'metadata'      => null,
             ],
         };
+
+        // Jenis Basa Rinengga untuk soal mandiri (dipakai rekomendasi materi di Tahap 9).
+        if (array_key_exists('rinengga_type_id', $d)) {
+            $meta = is_array($attrs['metadata'] ?? null) ? $attrs['metadata'] : [];
+            if (filled($d['rinengga_type_id'])) {
+                $meta['rinengga_type_id'] = (int) $d['rinengga_type_id'];
+            }
+            $attrs['metadata'] = $meta ?: null;
+        }
 
         // Jika model tidak men-cast kolom ke array, simpan sebagai JSON string.
         foreach (['keywords', 'metadata'] as $field) {

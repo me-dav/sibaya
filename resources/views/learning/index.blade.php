@@ -18,7 +18,7 @@
             {{-- Pambuka --}}
             <section id="pambuka" class="scroll-mt-24" aria-labelledby="h-pambuka">
                 <h2 id="h-pambuka" class="mb-4 text-2xl font-bold text-sibaya-navy-800">Pambuka Basa Rinengga</h2>
-                <div class="grid gap-6 rounded-2xl border border-sibaya-ruang-line bg-sibaya-ruang-bg p-6 lg:grid-cols-12">
+                <div class="grid gap-6 rounded-2xl border border-sibaya-sky-200 bg-sibaya-sky-100 p-6 lg:grid-cols-12">
                     <div class="lg:col-span-5">
                         <h3 class="text-lg font-bold text-sibaya-navy-800">Apa iku Basa Rinengga?</h3>
                         <p class="mt-2 text-sm leading-relaxed">
@@ -60,11 +60,11 @@
             {{-- Pintasan bagian materi --}}
             @php
                 $cards = [
-                    ['id' => 'ciri', 'key' => 'contoh', 'anchor' => '#contoh', 'title' => 'Ciri-Ciri lan Tuladha', 'desc' => 'Sinau ciri-ciri saben jinis lan tuladha ukara, tegese, lan bedane antarane jinis-jinis.', 'cta' => 'Waca Materi', 'box' => 'bg-sibaya-ruang-bg border-sibaya-ruang-line'],
+                    ['id' => 'ciri', 'key' => 'contoh', 'anchor' => '#contoh', 'title' => 'Ciri-Ciri lan Tuladha', 'desc' => 'Sinau ciri-ciri saben jinis lan tuladha ukara, tegese, lan bedane antarane jinis-jinis.', 'cta' => 'Waca Materi', 'box' => 'bg-blue-50 border-sibaya-sky-200'],
                     ['id' => 'teks', 'key' => 'teks', 'anchor' => '#isi', 'title' => 'Basa Rinengga ing Teks', 'desc' => 'Ngenali lan ngerteni teges Basa Rinengga adhedhasar konteks ing teks, crita, pacelathon, geguritan, lsp.', 'cta' => 'Waca Materi', 'box' => 'bg-purple-50 border-purple-200'],
-                    ['id' => 'audio-nyimak', 'key' => 'audio', 'anchor' => '#audio', 'title' => 'Audio Nyimak', 'desc' => 'Rekaman teks, pacelathon, lan tuladha Basa Rinengga lengkap karo transkrip.', 'cta' => 'Rungokna Audio', 'box' => 'bg-sibaya-gladhen-bg border-sibaya-gladhen-line'],
+                    ['id' => 'audio-nyimak', 'key' => 'audio', 'anchor' => '#audio', 'title' => 'Audio Nyimak', 'desc' => 'Rekaman teks, pacelathon, lan tuladha Basa Rinengga lengkap karo transkrip.', 'cta' => 'Rungokna Audio', 'box' => 'bg-emerald-50 border-emerald-200'],
                     ['id' => 'video-piwulang', 'key' => 'video', 'anchor' => '#video', 'title' => 'Video Piwulang', 'desc' => 'Video penjelasan materi, tuladha panggonane Basa Rinengga, lan panjelasan luwih jero.', 'cta' => 'Tonton Video', 'box' => 'bg-violet-50 border-violet-200'],
-                    ['id' => 'rangkuman-materi', 'key' => 'rangkuman', 'anchor' => '#rangkuman', 'title' => 'Rangkuman Materi', 'desc' => 'Poin-poin penting, tabel ringkes, lan peta konsep Basa Rinengga.', 'cta' => 'Lihat Rangkuman', 'box' => 'bg-sky-50 border-sky-200'],
+                    ['id' => 'rangkuman-materi', 'key' => 'rangkuman', 'anchor' => '#rangkuman', 'title' => 'Rangkuman Materi', 'desc' => 'Poin-poin penting, tabel ringkes, lan peta konsep Basa Rinengga.', 'cta' => 'Lihat Rangkuman', 'box' => 'bg-amber-50 border-amber-200'],
                 ];
             @endphp
             <section class="grid gap-4 md:grid-cols-2" aria-label="Bagian materi">

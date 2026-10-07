@@ -142,7 +142,7 @@ class StudentController extends Controller
 
     private function hasHistory(User $student): bool
     {
-        foreach (['exercise_attempts', 'evaluation_attempts', 'recommendations', 'certificates'] as $table) {
+        foreach (['exercise_attempts', 'evaluation_attempts', 'recommendations', 'certificates', 'puzzle_attempts'] as $table) {
             if (DB::table($table)->where('user_id', $student->id)->exists()) {
                 return true;
             }

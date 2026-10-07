@@ -51,7 +51,8 @@ class AdminStatisticsService
             ->where('status', 'completed')->latest('submitted_at')->limit($limit)->get()
             ->map(fn ($a) => [
                 'kind' => 'Evaluasi', 'student' => $a->user?->name, 'title' => $a->evaluation?->title,
-                'score' => $a->score, 'at' => $a->submitted_at, 'url' => null,
+                'score' => $a->score, 'at' => $a->submitted_at,
+                'url' => route('admin.results.evaluations.show', $a),
             ]);
 
         return $exercise->concat($evaluation)->sortByDesc('at')->take($limit)->values();
