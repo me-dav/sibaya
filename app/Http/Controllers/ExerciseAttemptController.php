@@ -11,6 +11,7 @@ use App\Services\ExerciseAttemptService;
 use DomainException;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\View\View;
 
 class ExerciseAttemptController extends Controller
@@ -33,7 +34,7 @@ class ExerciseAttemptController extends Controller
     /** Form pengerjaan. Kunci jawaban tidak dikirim; baris analisis hanya lewat analysisLabels(). */
     public function show(ExerciseAttempt $attempt): View|RedirectResponse
     {
-        $this->authorize('view', $attempt);
+        Gate::authorize('view', $attempt);
 
         if ($attempt->status === AttemptStatus::COMPLETED) {
             return redirect()->route('exercises.result', $attempt);
@@ -48,6 +49,8 @@ class ExerciseAttemptController extends Controller
 
     public function submit(SubmitExerciseRequest $request, ExerciseAttempt $attempt): RedirectResponse
     {
+        Gate::authorize('view', $attempt);
+
         $this->service->submit($attempt, $request->validated('answers') ?? []);
 
         return redirect()->route('exercises.result', $attempt);
@@ -55,7 +58,7 @@ class ExerciseAttemptController extends Controller
 
     public function result(ExerciseAttempt $attempt, AnswerEvaluationService $evaluator): View|RedirectResponse
     {
-        $this->authorize('view', $attempt);
+        Gate::authorize('view', $attempt);
 
         if ($attempt->status !== AttemptStatus::COMPLETED) {
             return redirect()->route('exercises.attempt', $attempt);

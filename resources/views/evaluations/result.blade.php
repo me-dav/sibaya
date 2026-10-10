@@ -10,7 +10,7 @@
 
         <section class="mt-6 rounded-3xl bg-white p-8 text-center shadow-sm ring-1 ring-sibaya-sky-200" aria-labelledby="h-hasil">
             <h1 id="h-hasil" class="text-lg font-semibold text-sibaya-navy-800">Hasil {{ $evaluation->title }}</h1>
-            @if ($attempt->status === 'expired')
+            @if (($attempt->status instanceof \BackedEnum ? $attempt->status->value : (string) $attempt->status) === 'expired')
                 <p class="mt-2 inline-block rounded-full bg-amber-100 px-4 py-1 text-sm text-amber-900">⏱ Wektu entek, jawaban sing wis kasimpen dikirim otomatis.</p>
             @endif
             <p class="mt-4 text-6xl font-extrabold text-sibaya-navy-800">{{ $fmt($attempt->score) }}</p>

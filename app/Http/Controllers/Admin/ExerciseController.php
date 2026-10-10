@@ -75,7 +75,7 @@ class ExerciseController extends Controller
             'exercise'     => $exercise,
             'questions'    => $questions,
             'allowedTypes' => Labels::allowedQuestionTypes(Labels::value($exercise->exercise_type)),
-            'usedIds'      => $questions->filter(fn ($q) => $this->questions->isUsed($q))->pluck('id')->all(),
+            'usedIds'      => $this->questions->usedQuestionIds($questions->pluck('id')),
         ]);
     }
 

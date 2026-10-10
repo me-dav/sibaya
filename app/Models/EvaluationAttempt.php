@@ -24,8 +24,17 @@ class EvaluationAttempt extends Model
             'started_at' => 'datetime',
             'submitted_at' => 'datetime',
             'score' => 'decimal:2',
-            'status' => EvaluationAttemptStatus::class,
         ];
+    }
+
+    public function setStatusAttribute(mixed $value): void
+    {
+        $this->attributes['status'] = $value instanceof \BackedEnum ? $value->value : (string) $value;
+    }
+
+    public function statusEnum(): ?EvaluationAttemptStatus
+    {
+        return EvaluationAttemptStatus::tryFrom((string) $this->status);
     }
 
     public function user(): BelongsTo

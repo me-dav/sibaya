@@ -98,6 +98,28 @@ class QuestionService
             || DB::table('evaluation_answers')->where('question_id', $question->id)->exists();
     }
 
+    /**
+     * Versi massal isUsed(): id soal (dari $ids) yang sudah dijawab atau dipakai evaluasi.
+     * Tiga query total, berapa pun jumlah soalnya.
+     *
+     * @param iterable<int> $ids
+     * @return array<int, int>
+     */
+    public function usedQuestionIds(iterable $ids): array
+    {
+        $ids = collect($ids)->values()->all();
+
+        if ($ids === []) {
+            return [];
+        }
+
+        return collect()
+            ->merge(DB::table('exercise_answers')->whereIn('question_id', $ids)->distinct()->pluck('question_id'))
+            ->merge(DB::table('evaluation_questions')->whereIn('question_id', $ids)->distinct()->pluck('question_id'))
+            ->merge(DB::table('evaluation_answers')->whereIn('question_id', $ids)->distinct()->pluck('question_id'))
+            ->map(fn ($id) => (int) $id)->unique()->values()->all();
+    }
+
     public function delete(Question $question): void
     {
         $audio = $question->audio_path;
@@ -119,7 +141,7 @@ class QuestionService
             return false;
         }
 
-        return ! Question::where('exercise_id', $exercise->id)->get()->contains(fn ($q) => $this->isUsed($q));
+        return $this->usedQuestionIds(Question::where('exercise_id', $exercise->id)->pluck('id')) === [];
     }
 
     public function deleteExercise(Exercise $exercise): void

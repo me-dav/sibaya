@@ -123,7 +123,7 @@
                             </div>
 
                             <a href="{{ route('exercises.show', $exercise) }}"
-                               class="inline-flex w-full shrink-0 items-center justify-center gap-2 rounded-full bg-navy-800 px-5 py-2 text-sm font-bold text-white transition hover:bg-navy-700 focus:outline-none focus-visible:ring-2 focus-visible:ring-gold-500 focus-visible:ring-offset-2 sm:w-auto"
+                               class="inline-flex w-full shrink-0 items-center justify-center gap-2 rounded-full bg-sibaya-navy-800 px-5 py-2 text-sm font-bold text-white transition hover:bg-navy-700 focus:outline-none focus-visible:ring-2 focus-visible:ring-gold-500 focus-visible:ring-offset-2 sm:w-auto"
                                aria-label="Mulai {{ $exercise->title }}">
                                 Mulai Latihan <x-icon name="arrow-right" size="h-4 w-4" />
                             </a>

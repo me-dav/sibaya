@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class PuzzleAttempt extends Model
 {
-    protected $guarded = [];
+    protected $fillable = ['user_id', 'puzzle_id', 'score', 'duration_seconds', 'completed_at'];
 
     protected function casts(): array
     {

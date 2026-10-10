@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Enums\QuestionType;
 use App\Models\ExerciseAttempt;
 use App\Models\Question;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Storage;
 use Symfony\Component\HttpFoundation\BinaryFileResponse;
 
@@ -21,7 +22,7 @@ class ExerciseAudioController extends Controller
 
     public function show(ExerciseAttempt $attempt, Question $question): BinaryFileResponse
     {
-        $this->authorize('view', $attempt);
+        Gate::authorize('view', $attempt);
 
         abort_unless(
             $question->exercise_id === $attempt->exercise_id

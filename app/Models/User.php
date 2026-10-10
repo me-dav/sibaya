@@ -47,4 +47,29 @@ class User extends Authenticatable
     {
         return $this->role === UserRole::SISWA;
     }
+
+    public function exerciseAttempts(): \Illuminate\Database\Eloquent\Relations\HasMany
+    {
+        return $this->hasMany(ExerciseAttempt::class);
+    }
+
+    public function evaluationAttempts(): \Illuminate\Database\Eloquent\Relations\HasMany
+    {
+        return $this->hasMany(EvaluationAttempt::class);
+    }
+
+    public function puzzleAttempts(): \Illuminate\Database\Eloquent\Relations\HasMany
+    {
+        return $this->hasMany(PuzzleAttempt::class);
+    }
+
+    public function certificates(): \Illuminate\Database\Eloquent\Relations\HasMany
+    {
+        return $this->hasMany(Certificate::class);
+    }
+
+    public function recommendations(): \Illuminate\Database\Eloquent\Relations\HasMany
+    {
+        return $this->hasMany(Recommendation::class);
+    }
 }

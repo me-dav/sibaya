@@ -1,0 +1,6 @@
+<?php
+
+use Illuminate\Support\Facades\Schedule;
+
+// Tahap 8: tutup attempt evaluasi yang waktunya habis (cron: * * * * * php artisan schedule:run)
+Schedule::command('evaluations:expire')->everyFiveMinutes();

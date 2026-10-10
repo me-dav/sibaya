@@ -27,7 +27,7 @@
                 <tbody class="divide-y divide-slate-100">
                     @forelse ($exerciseAttempts as $a)
                         <tr><td class="px-4 py-3">{{ $a->exercise?->title }}</td><td class="px-4 py-3 font-semibold">{{ $fmt($a->score) }}</td>
-                            <td class="px-4 py-3">{{ $a->correct_answers }} / {{ $a->wrong_answers }}</td><td class="px-4 py-3">{{ $a->status }}</td>
+                            <td class="px-4 py-3">{{ $a->correct_answers }} / {{ $a->wrong_answers }}</td><td class="px-4 py-3">{{ \App\Support\Labels::value($a->status) }}</td>
                             <td class="px-4 py-3">{{ $a->started_at?->format('d M Y H:i') }}</td>
                             <td class="px-4 py-3 text-right"><a href="{{ route('admin.results.exercises.show', $a) }}" class="text-sibaya-navy-700 hover:underline">Detail</a></td></tr>
                     @empty
@@ -42,7 +42,7 @@
         <h2 id="h-eval" class="text-lg font-bold text-sibaya-navy-800">Riwayat Evaluasi</h2>
         <ul class="mt-3 divide-y divide-slate-100 rounded-xl bg-white text-sm shadow-sm ring-1 ring-slate-200">
             @forelse ($evaluationAttempts as $a)
-                <li class="flex justify-between px-4 py-3"><span>{{ $a->evaluation?->title }} ({{ $a->status }})</span><span class="font-semibold">Nilai {{ $fmt($a->score) }}</span></li>
+                <li class="flex justify-between px-4 py-3"><span>{{ $a->evaluation?->title }} ({{ \App\Support\Labels::value($a->status) }})</span><span class="font-semibold">Nilai {{ $fmt($a->score) }}</span></li>
             @empty
                 <li class="px-4 py-6 text-center text-slate-500">Durung ana riwayat.</li>
             @endforelse

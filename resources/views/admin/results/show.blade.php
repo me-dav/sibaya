@@ -11,7 +11,7 @@
         <div><dt class="text-slate-500">Nilai</dt><dd class="text-2xl font-extrabold text-sibaya-navy-800">{{ $fmt($attempt->score) }}</dd></div>
         <div><dt class="text-slate-500">Poin</dt><dd class="font-medium">{{ $attempt->total_points }}</dd></div>
         <div><dt class="text-slate-500">Bener / Salah</dt><dd class="font-medium">{{ $attempt->correct_answers }} / {{ $attempt->wrong_answers }}</dd></div>
-        <div><dt class="text-slate-500">Status</dt><dd class="font-medium">{{ $attempt->status }}</dd></div>
+        <div><dt class="text-slate-500">Status</dt><dd class="font-medium">{{ Labels::value($attempt->status) }}</dd></div>
     </dl>
 
     <ol class="mt-6 space-y-4">

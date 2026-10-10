@@ -12,4 +12,9 @@ class ExerciseAttemptPolicy
     {
         return $user->id === $attempt->user_id;
     }
+
+    public function answer(User $user, ExerciseAttempt $attempt): bool
+    {
+        return $this->view($user, $attempt);
+    }
 }

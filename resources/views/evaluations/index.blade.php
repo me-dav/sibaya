@@ -75,10 +75,13 @@
                 @auth
                     <ul class="mt-3 divide-y divide-slate-100 text-sm">
                         @forelse ($history as $a)
-                            @php $ev = $titles->get($a->evaluation_id); @endphp
+                            @php
+                                $ev = $titles->get($a->evaluation_id);
+                                $st = $a->status instanceof \BackedEnum ? $a->status->value : (string) $a->status;
+                            @endphp
                             <li class="flex flex-wrap items-center justify-between gap-2 py-2">
-                                <span>{{ $ev?->title }} <span class="text-xs text-slate-500">&middot; {{ $a->started_at?->translatedFormat('d M Y H:i') }} &middot; {{ $statusLabel[$a->status] ?? $a->status }}</span></span>
-                                @if ($a->status === 'in_progress')
+                                <span>{{ $ev?->title }} <span class="text-xs text-slate-500">&middot; {{ $a->started_at?->translatedFormat('d M Y H:i') }} &middot; {{ $statusLabel[$st] ?? $st }}</span></span>
+                                @if ($st === 'in_progress')
                                     <a href="{{ route('evaluations.attempts.show', $a) }}" class="text-sibaya-navy-700 underline">Lanjutake</a>
                                 @else
                                     <a href="{{ route('evaluations.attempts.result', $a) }}" class="text-sibaya-navy-700 underline">Nilai {{ $fmt($a->score) }}</a>

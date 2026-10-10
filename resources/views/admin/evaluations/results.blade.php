@@ -21,9 +21,9 @@
             <tbody class="divide-y divide-slate-100">
                 @forelse ($attempts as $a)
                     <tr><td class="px-4 py-3 font-medium">{{ $a->user?->name }}</td><td class="px-4 py-3">{{ $a->user?->class_name }}</td>
-                        <td class="px-4 py-3 font-semibold">{{ $fmt($a->score) }}</td>
-                        <td class="px-4 py-3">@if ($a->status === 'in_progress') - @elseif ($a->score >= $evaluation->passing_score) &#10003; Lulus @else &#10007; Durung lulus @endif</td>
-                        <td class="px-4 py-3">{{ $a->correct_answers }} / {{ $a->wrong_answers }}</td><td class="px-4 py-3">{{ $a->status }}</td>
+                        @php $st = $a->status instanceof \BackedEnum ? $a->status->value : (string) $a->status; @endphp
+                        <td class="px-4 py-3">@if ($st === 'in_progress') - @elseif ($a->score >= $evaluation->passing_score) &#10003; Lulus @else &#10007; Durung lulus @endif</td>
+                        <td class="px-4 py-3">{{ $a->correct_answers }} / {{ $a->wrong_answers }}</td><td class="px-4 py-3">{{ $st }}</td>
                         <td class="px-4 py-3">{{ $a->started_at?->format('d M Y H:i') }}</td>
                         <td class="px-4 py-3 text-right"><a href="{{ route('admin.results.evaluations.show', $a) }}" class="text-sibaya-navy-700 hover:underline">Detail</a></td></tr>
                 @empty

@@ -7,58 +7,27 @@ export default {
         './vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php',
         './storage/framework/views/*.php',
         './resources/views/**/*.blade.php',
-        './app/Enums/**/*.php',
     ],
-
     theme: {
         extend: {
             fontFamily: {
-                sans: ['Nunito', ...defaultTheme.fontFamily.sans],
-                display: ['"Baloo 2"', 'Nunito', ...defaultTheme.fontFamily.sans],
-                script: ['"Dancing Script"', 'cursive'],
+                sans: ['Poppins', ...defaultTheme.fontFamily.sans],
+                script: ['Caveat', 'cursive'],
             },
-
             colors: {
-                'sibaya-navy': {
-                    50: '#eef3fb',
-                    100: '#dce7f6',
-                    200: '#b9cfec',
-                    500: '#2c5a9e',
-                    600: '#1f4580',
-                    700: '#183a6e',
-                    800: '#132f5a',
-                    900: '#0e2447',
+                // Palet diambil dari 3 gambar referensi
+                sibaya: {
+                    navy: { 900: '#0A2A55', 800: '#12376B', 700: '#1B4A8A' },
+                    gold: { DEFAULT: '#E2AC2F', soft: '#F3D27A' },
+                    cream: '#FBF8F1',
+                    ink: '#14274A',
+                    sky: { 100: '#E8F0FC', 200: '#CFE0F7' },
+                    ruang: { bg: '#E8F0FC', line: '#C7D9F4', accent: '#2B3A8F' },
+                    gladhen: { bg: '#E6F4E8', line: '#BFE0C5', accent: '#3A7F50' },
+                    wahana: { bg: '#FEEBDD', line: '#F7CFB0', accent: '#E0622B', ink: '#8A2F0F' },
                 },
-
-                'sibaya-gold': {
-                    300: '#f3d57a',
-                    400: '#edc04f',
-                    500: '#e5ab2a',
-                    600: '#c98f14',
-                    DEFAULT: '#C9A227',
-                },
-
-                'sibaya-cream': {
-                    50: '#fffdf8',
-                    100: '#fbf8f0',
-                    200: '#f4eedd',
-                },
-
-                'sibaya-ink': '#263238',
-
-                'sibaya-gold-soft': '#F3D27A',
-
-                'sibaya-sky': {
-                    100: '#e0f2fe',
-                    200: '#bae6fd',
-                },
-            },
-
-            outlineColor: {
-                'sibaya-gold': '#C9A227',
             },
         },
     },
-
     plugins: [forms],
 };

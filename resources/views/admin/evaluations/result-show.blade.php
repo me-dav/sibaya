@@ -8,7 +8,7 @@
         <div><dt class="text-slate-500">Kelulusan</dt><dd class="font-medium">{{ $attempt->score >= $evaluation->passing_score ? '✓ Lulus' : '✗ Durung lulus' }}</dd></div>
         <div><dt class="text-slate-500">Poin</dt><dd class="font-medium">{{ $attempt->total_points }}</dd></div>
         <div><dt class="text-slate-500">Durasi</dt><dd class="font-medium">{{ $attempt->duration_seconds !== null ? gmdate('i:s', (int) $attempt->duration_seconds) : '-' }}</dd></div>
-        <div><dt class="text-slate-500">Status</dt><dd class="font-medium">{{ $attempt->status }}</dd></div>
+        <div><dt class="text-slate-500">Status</dt><dd class="font-medium">{{ Labels::value($attempt->status) }}</dd></div>
     </dl>
 
     <ol class="mt-6 space-y-4">

@@ -59,8 +59,9 @@
                 <ul class="mt-3 divide-y divide-slate-100 rounded-2xl bg-white text-sm shadow-sm ring-1 ring-sibaya-sky-200">
                     @forelse ($attempts as $a)
                         <li class="flex flex-wrap items-center justify-between gap-2 px-4 py-3">
-                            <span>Percobaan {{ $loop->remaining + 1 }} &middot; {{ $a->started_at?->translatedFormat('d M Y H:i') }} &middot; {{ $statusLabel[$a->status] ?? $a->status }}</span>
-                            @if ($a->status === 'in_progress')
+                            @php $st = $a->status instanceof \BackedEnum ? $a->status->value : (string) $a->status; @endphp
+                            <span>Percobaan {{ $loop->remaining + 1 }} &middot; {{ $a->started_at?->translatedFormat('d M Y H:i') }} &middot; {{ $statusLabel[$st] ?? $st }}</span>
+                            @if ($st === 'in_progress')
                                 <a href="{{ route('evaluations.attempts.show', $a) }}" class="text-sibaya-navy-700 underline">Lanjutake</a>
                             @else
                                 <a href="{{ route('evaluations.attempts.result', $a) }}" class="text-sibaya-navy-700 underline">

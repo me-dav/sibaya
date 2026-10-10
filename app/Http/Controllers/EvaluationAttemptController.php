@@ -40,7 +40,8 @@ class EvaluationAttemptController extends Controller
         Gate::authorize('view', $attempt);
 
         $attempt = $this->service->finalizeIfExpired($attempt);
-        if ($attempt->status !== 'in_progress') {
+        $status = $attempt->status instanceof \BackedEnum ? $attempt->status->value : (string) $attempt->status;
+        if ($status !== 'in_progress') {
             return redirect()->route('evaluations.attempts.result', $attempt);
         }
 
@@ -91,7 +92,8 @@ class EvaluationAttemptController extends Controller
         Gate::authorize('view', $attempt);
 
         $attempt = $this->service->finalizeIfExpired($attempt);
-        if ($attempt->status === 'in_progress') {
+        $status = $attempt->status instanceof \BackedEnum ? $attempt->status->value : (string) $attempt->status;
+        if ($status === 'in_progress') {
             return redirect()->route('evaluations.attempts.show', $attempt);
         }
 
