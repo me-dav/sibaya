@@ -328,7 +328,10 @@ class EvaluationService
             default           => throw new \LogicException("Tipe soal {$type} tidak didukung pada evaluasi."),
         };
 
-        if (is_array($raw)) {
+        if ($raw instanceof \App\Support\AnswerResult) {
+            $ok = $raw->isCorrect;
+            $points = $raw->pointsEarned;
+        } elseif (is_array($raw)) {
             $points = $raw['points_earned'] ?? $raw['points'] ?? null;
             $ok = (bool) ($raw['is_correct'] ?? ((float) $points > 0));
             $points ??= $ok ? $question->points : 0;
