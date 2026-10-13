@@ -17,6 +17,8 @@ return Application::configure(basePath: dirname(__DIR__))
             'role' => EnsureUserHasRole::class,
         ]);
 
+        $middleware->trustProxies(at: '*');
+
         // Akun nonaktif otomatis keluar di setiap request.
         $middleware->appendToGroup('web', EnsureUserIsActive::class);
     })
