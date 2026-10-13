@@ -11,7 +11,7 @@
         'gamepad'    => 'M7 6h10a4 4 0 014 4v4a3 3 0 01-5.2 2L14 15h-4l-1.8 1A3 3 0 013 14v-4a4 4 0 014-4zM8 9v4M6 11h4M15 12h.01M18 10h.01',
     ];
 @endphp
-<article {{ $attributes->merge(['class' => "flex flex-col rounded-2xl border p-6 shadow-sm {$t['box']}"]) }}>
+<article {{ $attributes->merge(['class' => "flex flex-col rounded-2xl border p-6 shadow-sm {$t['box']} hover:-translate-y-3 hover:shadow-md transition duration-300 ease-in"]) }}>
     <div class="flex items-center gap-4">
         <span class="flex h-14 w-14 shrink-0 items-center justify-center rounded-full text-white {{ $t['badge'] }}" aria-hidden="true">
             <svg class="h-7 w-7" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="{{ $icons[$icon] }}"/></svg>
