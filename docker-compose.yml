@@ -1,52 +1,74 @@
+name: sibaya
+
 services:
-  # 1. PHP-FPM Service
   app:
     build:
       context: .
-      dockerfile: Dockerfile
-    container_name: laravel_app
+      target: production
+    image: sibaya-app:latest
     restart: unless-stopped
+    env_file: .env
+    environment:
+      # Nilai di bawah menimpa isi .env
+      APP_ENV: production
+      APP_DEBUG: "false"
+      DB_CONNECTION: pgsql
+      DB_HOST: db
+      DB_PORT: "5432"
+      RUN_MIGRATIONS: ${RUN_MIGRATIONS:-true}
     volumes:
-      - .:/var/www
-    networks:
-      - laravel_net
+      - storage_data:/var/www/html/storage
     depends_on:
-      - postgres
+      db:
+        condition: service_healthy
+    networks: [internal]
 
-  # 2. Nginx Web Server Service
   web:
-    image: nginx:alpine
-    container_name: laravel_web
+    build:
+      context: .
+      target: web
+    image: sibaya-web:latest
     restart: unless-stopped
     ports:
-      # Port 8088 di host akan kita forward ke domain lewat aaPanel
-      - "8088:80"
+      # Default: hanya bisa diakses dari server itu sendiri (untuk reverse proxy/TLS di host).
+      # Untuk membuka langsung ke internet: WEB_BIND=0.0.0.0 dan WEB_PORT=80
+      - "${WEB_BIND:-127.0.0.1}:${WEB_PORT:-8080}:80"
     volumes:
-      - .:/var/www
-      - ./docker/nginx/default.conf:/etc/nginx/conf.d/default.conf:ro
-    networks:
-      - laravel_net
-    depends_on:
-      - app
+      - storage_data:/var/www/html/storage:ro
+    depends_on: [app]
+    networks: [internal]
 
-  # 3. PostgreSQL Database Service
-  postgres:
+  db:
     image: postgres:16-alpine
-    container_name: laravel_postgres
     restart: unless-stopped
     environment:
-      POSTGRES_DB: ${DB_DATABASE:-laravel}
-      POSTGRES_USER: ${DB_USERNAME:-postgres}
-      POSTGRES_PASSWORD: ${DB_PASSWORD:-secret123}
+      POSTGRES_DB: ${DB_DATABASE}
+      POSTGRES_USER: ${DB_USERNAME}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
     volumes:
-      - postgres_data:/var/lib/postgresql/data
-    networks:
-      - laravel_net
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U $${POSTGRES_USER} -d $${POSTGRES_DB}"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+    # Sengaja TANPA "ports": database tidak dibuka ke luar Docker
+    networks: [internal]
 
-networks:
-  laravel_net:
-    driver: bridge
+  # Opsional: aktifkan jika nanti memakai antrean (queue) atau email terjadwal
+  # worker:
+  #   image: sibaya-app:latest
+  #   restart: unless-stopped
+  #   env_file: .env
+  #   environment: { APP_ENV: production, DB_HOST: db }
+  #   command: php artisan queue:work --sleep=3 --tries=3 --max-time=3600
+  #   volumes: [storage_data:/var/www/html/storage]
+  #   depends_on: [app]
+  #   networks: [internal]
 
 volumes:
-  postgres_data:
-    driver: local
+  pgdata:
+  storage_data:
+
+networks:
+  internal:
