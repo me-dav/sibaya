@@ -1,4 +1,4 @@
-@php $fmt = fn ($n) => number_format((float) $n, 1, ',', '.'); @endphp
+@php use App\Support\Labels; $fmt = fn ($n) => number_format((float) $n, 1, ',', '.'); @endphp
 <x-layouts.admin title="Hasil Latihan">
     <h1 class="text-2xl font-bold text-sibaya-navy-800">Hasil Gladhen</h1>
     <x-flash />

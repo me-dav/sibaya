@@ -18,7 +18,7 @@
             {{-- Pambuka --}}
             <section id="pambuka" class="scroll-mt-24" aria-labelledby="h-pambuka">
                 <h2 id="h-pambuka" class="mb-4 text-2xl font-bold text-sibaya-navy-800">Pambuka Basa Rinengga</h2>
-                <div class="grid gap-6 rounded-2xl border border-sibaya-ruang-line bg-sibaya-ruang-bg p-6 lg:grid-cols-12">
+                <div class="grid gap-6 rounded-2xl border border-sibaya-ruang-line shadow-md bg-sibaya-ruang-bg p-6 lg:grid-cols-12">
                     <div class="lg:col-span-5">
                         <h3 class="text-lg font-bold text-sibaya-navy-800">Apa iku Basa Rinengga?</h3>
                         <p class="mt-2 text-sm leading-relaxed">
@@ -70,7 +70,7 @@
             <section class="grid gap-4 md:grid-cols-2" aria-label="Bagian materi">
                 @foreach ($cards as $card)
                     @php $target = $shortcuts[$card['key']]; @endphp
-                    <article id="{{ $card['id'] }}" class="flex scroll-mt-24 flex-col rounded-2xl border p-5 {{ $card['box'] }}">
+                    <article id="{{ $card['id'] }}" class="flex scroll-mt-24 flex-col rounded-2xl border p-5 {{ $card['box'] }} hover:scale-[102%] hover:shadow-md transition duration-200 ease-in">
                         <h3 class="text-lg font-bold text-sibaya-navy-800">{{ $card['title'] }}</h3>
                         <p class="mt-2 flex-1 text-sm leading-relaxed text-sibaya-ink/80">{{ $card['desc'] }}</p>
                         @if ($target)

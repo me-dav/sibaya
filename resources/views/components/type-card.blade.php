@@ -10,7 +10,7 @@
     ];
     $theme = $themes[$type->slug] ?? ['box' => 'bg-slate-50 border-slate-200', 'icon' => 'text-slate-600', 'path' => 'M5 4h14v16H5zM9 8h6M9 12h6'];
 @endphp
-<article class="flex flex-col rounded-2xl border p-5 {{ $theme['box'] }}">
+<article class="flex flex-col rounded-2xl border p-5 {{ $theme['box'] }} hover:scale-[102%] hover:shadow-md transition duration-200 ease-in">
     <svg class="h-10 w-10 {{ $theme['icon'] }}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="{{ $theme['path'] }}"/></svg>
     <h3 class="mt-4 text-lg font-bold text-sibaya-navy-800">{{ $type->name }}</h3>
     <p class="mt-2 flex-1 text-sm leading-relaxed text-sibaya-ink/80">{{ $type->short_description }}</p>

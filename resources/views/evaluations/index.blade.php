@@ -7,7 +7,7 @@
 <x-layouts.public title="Evaluasi">
     <div class="mx-auto max-w-7xl space-y-10 px-4 py-8 sm:px-6 lg:px-8">
         <x-hero badge="Evaluasi" title="UTS lan UAS" subtitle="Basa Rinengga Kelas X SMA">
-            Ukur pemahamanmu. Kerjakan UTS (pilihan ganda) lan UAS (isian) sajrone wektu sing wis ditemtokake.
+        <p class="bg-sky-100/80 p-2 rounded-lg ring-1 ring-sibaya-navy-200 backdrop-blur-sm">Ukur pemahamanmu. Kerjakan UTS (pilihan ganda) lan UAS (isian) sajrone wektu sing wis ditemtokake.</p>
         </x-hero>
 
         <x-flash />
